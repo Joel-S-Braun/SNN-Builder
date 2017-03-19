@@ -8,7 +8,6 @@ local render_function = {
 
 function render(delta)
 	for _,object in pairs(workspace:getchildren()) do
-		print(object.type)
 		render_function[object.type](object)
 	end
 end

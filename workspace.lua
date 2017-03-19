@@ -1,7 +1,7 @@
 workspace = {}
 
-local types = {
-	input_neuron = {},
+types = {
+	input_neuron = {'axiom'},
 	hidden_neuron= {},
 	output_neuron= {},
 }
