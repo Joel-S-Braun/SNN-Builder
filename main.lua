@@ -1,31 +1,34 @@
-local text = 'hi'
+local fprint = print
 
 function love.draw(d)
-	local selected,offset = get_selected()
-	--print(selected,offset.x..','..offset.y)
-	love.graphics.setColor(255, 255, 255, alpha)
-	love.graphics.print(text,200,200)
+	--v=binser.serialize{a='ur dadda'}
+    input.update()
 	render(d)
 end
 
-function love.textinput(t)
-	text = text..t
-	print(text)
-end
-
-function love.keypressed(key)
-	if key == "backspace" then
-		text = text:sub(1,#text-1)
-		print(text)
-	end
+function love.quit()
+	--format
+	for i,v in pairs(workspace) do
+        if type(v) == 'table' then
+            v.destroy = nil
+        elseif type(v) == 'function' then
+            workspace[i] = nil
+        end
+	end --]]
+	local file = ser(workspace)
+	love.filesystem.write('workspace_'..settings.ai_model..'.lua',file)
+    
+	--local chunk = love.filesystem.load('workspace_persistant.lua')
 end
 
 function love.load(func, chunkname)
+	fprint('consoley')
 	love.keyboard.setKeyRepeat(true)
-
+	
+    require('ser')
 	require('settings')
 	require('vector2')
 	require('workspace')
-	require('mouse')
+	require('input')
 	require('render')
 end

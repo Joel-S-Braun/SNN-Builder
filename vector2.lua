@@ -6,8 +6,8 @@ vector2 = {
 			return (self.x^2+self.y^2)^0.5
 		end,
 	},
-	__add = function(self,vec)
-		print('attempted to add')
+	__add = function(self,vec,...)
+		print(self,vec,...,'innit')
 		return vector2.new(self.x+vec.x,self.y+vec.y)
 	end,
 
