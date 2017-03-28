@@ -1,7 +1,5 @@
-local fprint = print
-
 function love.draw(d)
-	--v=binser.serialize{a='ur dadda'}
+    gametime = gametime + settings.step
     input.update()
 	render(d)
 end
@@ -22,7 +20,8 @@ function love.quit()
 end
 
 function love.load(func, chunkname)
-	fprint('consoley')
+	print('what')
+	font = love.graphics.setNewFont(11)
 	love.keyboard.setKeyRepeat(true)
 	
     require('ser')
