@@ -17,38 +17,17 @@ end
 
 gametime = 0
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 love.filesystem.load("data.lua")()
 print(neuron_input,'gang gang')
 
 local function activation_f(x)
     --local x=x*10 -- converts to ms for inpit
 	return math.sin(1/(x/36+0.31845))^4
-=======
-=======
->>>>>>> origin/master
-local neuron_input = {bias=7}
-
-local function activation_f(x)
-	return math.sin(1/(x+0.362) *  1.3)
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 end
 
 function approx_equal(a,b,e)
     local m = 10^(e or 3)
-<<<<<<< HEAD
-<<<<<<< HEAD
     return (math.floor(a*m+0.5)/m)==(math.floor(a*b+0.5)/m)
-=======
-    return (math.floor(a*m)/m)==(math.floor(a*b)/m)
->>>>>>> origin/master
-=======
-    return (math.floor(a*m)/m)==(math.floor(a*b)/m)
->>>>>>> origin/master
 end
 
 local ftype = type
@@ -82,16 +61,10 @@ function workspace:new_connection(from,to,v)
 	from.connections[to] = v
 end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 function love.focus()
     love.filesystem.load("data.lua")()
 end
 
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
 function workspace:get_activation(neuron) --
     if neuron.type ~= 'input_neuron' then
         local bassline_value = 0
@@ -105,15 +78,7 @@ function workspace:get_activation(neuron) --
             for _,data in  pairs(neuron.input) do -- gets activation value for each neurotransmitter
                 local offset_time = gametime-data.time
                 if data.transmitter == 'fire' then
-<<<<<<< HEAD
-<<<<<<< HEAD
                     local activation = (1-activation_f((offset_time * settings.membrane_leak_multiplier)+settings.term_time)) *-settings.negative_drop
-=======
-                    local activation = (1-activation_f(offset_time+settings.term_time)) *-settings.negative_drop
->>>>>>> origin/master
-=======
-                    local activation = (1-activation_f(offset_time+settings.term_time)) *-settings.negative_drop
->>>>>>> origin/master
                     bassline_transmitters[data.transmitter] = (bassline_transmitters[data.transmitter] or 0) + settings.negative_drop + activation
                 else
                     local activation = activation_f(offset_time) * data.amount
@@ -159,8 +124,6 @@ function workspace:get_activation(neuron) --
             end
 
             for neurotransmitter,value in pairs(bassline_transmitters) do -- bassline_transmitters have been converted into genuine transmitters value
-<<<<<<< HEAD
-<<<<<<< HEAD
                 local exeptions = exeption_list[neuron.name]
                 local exeption_multiplier
                 if exeptions then
@@ -168,12 +131,6 @@ function workspace:get_activation(neuron) --
                 end
                 exeption_multiplier = exeption_multiplier or settings.neurotransmitter_membrane_offset[neurotransmitter]
                 bassline_value = bassline_value + exeption_multiplier * value -- add exeptions
-=======
-                bassline_value = bassline_value + settings.neurotransmitter_threshold_offset[neurotransmitter] * value -- add exeptions
->>>>>>> origin/master
-=======
-                bassline_value = bassline_value + settings.neurotransmitter_threshold_offset[neurotransmitter] * value -- add exeptions
->>>>>>> origin/master
             end
         end
 

@@ -6,7 +6,6 @@ function love.keypressed(key) -- change name UNLESS modify exists
 		input.selected1 = nil
 		input.selected2 = nil
 	end
-	print(key,'kent nizzy')
 	if key == 'space' then
 		key = ' '
 	end

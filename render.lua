@@ -66,14 +66,6 @@ function render(delta) -- possibly need to order so that input render first?
     
 	render_select(1)
 	render_select(2)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    print('')
->>>>>>> origin/master
-=======
-    print('')
->>>>>>> origin/master
 	for _,object in pairs(workspace:getchildren()) do -- potentially want to run SORTED (as in, inputs first?) just so the SNN runs in order
         for to_obj,weight in pairs(object.connections) do
             if approx_equal(weight,0,1) then
@@ -98,14 +90,6 @@ function render(delta) -- possibly need to order so that input render first?
     end
     love.graphics.printf('total neuron count: '..total,0,(len+1)*16,12*50,'left')
     love.graphics.printf('total connection count: '..total_connections,0,(len+2)*16,12*50,'left')
-<<<<<<< HEAD
-<<<<<<< HEAD
     love.graphics.printf('gametime: '..(math.floor(gametime))..'ms',0,(len+3)*16,12*50,'left')
-=======
-    love.graphics.printf('gametime: '..(math.floor(gametime*10))..'ms',0,(len+3)*16,12*50,'left')
->>>>>>> origin/master
-=======
-    love.graphics.printf('gametime: '..(math.floor(gametime*10))..'ms',0,(len+3)*16,12*50,'left')
->>>>>>> origin/master
     love.graphics.printf('fps: '..love.timer:getFPS(),0,(len+4)*16,12*50,'left')
 end
