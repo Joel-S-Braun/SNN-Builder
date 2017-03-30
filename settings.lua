@@ -1,5 +1,6 @@
 settings = {
 <<<<<<< HEAD
+<<<<<<< HEAD
     ai_model = 'no save',
     step = 1/3,--0.468126878/2
     --the reason i use step value instead of 1/fps is because while in LOVE2D, the framerate can vary from 400-100 as long as vsync is off, ROBLOX has fps limit of 60
@@ -26,6 +27,19 @@ settings = {
     negative_drop = -2, -- the value of neuron membrane once action potential has been fired
     
 >>>>>>> origin/master
+=======
+    ai_model = 'demo',
+    step = 1/30,--0.468126878/2
+    --the reason i use step value instead of 1/fps is because while in LOVE2D, the framerate can vary from 400-100 as long as vsync is off, ROBLOX has fps limit of 60
+    --this limit means that if the FPS drops, then it may end up offsetting the 
+    
+    term_time= 0.468126878, -- also peak time
+    critical_activation = 0.01,
+    lock_time = 300,
+    
+    negative_drop = -2, -- the value of neuron membrane once action potential has been fired
+    
+>>>>>>> origin/master
 	instance_key = {
 		h='hidden_neuron',
 		i='input_neuron',
@@ -33,7 +47,10 @@ settings = {
 		s='soft_mem_neuron',
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/master
     
     neurotransmitter_threshold_offset = {
         dopamine= 0.8,-- should be exhibitory and inhibitory,
@@ -70,6 +87,9 @@ settings = {
         {'epinephrine','dopamine'},
         
     },
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
 
     synthesis = {
@@ -87,6 +107,7 @@ settings = {
         [']'] = 0.1,
     },
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     fire_neuron = {
         f=7,
@@ -121,6 +142,8 @@ settings = {
         
     },
 
+=======
+>>>>>>> origin/master
 =======
 >>>>>>> origin/master
     colours = {

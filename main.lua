@@ -24,7 +24,10 @@ end
 function love.load(func, chunkname)
 	print('what')
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 =======
 >>>>>>> origin/master
 	font = love.graphics.setNewFont(11)

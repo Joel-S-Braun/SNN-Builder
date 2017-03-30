@@ -67,6 +67,10 @@ function render(delta) -- possibly need to order so that input render first?
 	render_select(1)
 	render_select(2)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    print('')
+>>>>>>> origin/master
 =======
     print('')
 >>>>>>> origin/master
@@ -95,7 +99,11 @@ function render(delta) -- possibly need to order so that input render first?
     love.graphics.printf('total neuron count: '..total,0,(len+1)*16,12*50,'left')
     love.graphics.printf('total connection count: '..total_connections,0,(len+2)*16,12*50,'left')
 <<<<<<< HEAD
+<<<<<<< HEAD
     love.graphics.printf('gametime: '..(math.floor(gametime))..'ms',0,(len+3)*16,12*50,'left')
+=======
+    love.graphics.printf('gametime: '..(math.floor(gametime*10))..'ms',0,(len+3)*16,12*50,'left')
+>>>>>>> origin/master
 =======
     love.graphics.printf('gametime: '..(math.floor(gametime*10))..'ms',0,(len+3)*16,12*50,'left')
 >>>>>>> origin/master
