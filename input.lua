@@ -6,12 +6,14 @@ function love.keypressed(key) -- change name UNLESS modify exists
 		input.selected1 = nil
 		input.selected2 = nil
 	end
+	print(key,'kent nizzy')
 	if key == 'space' then
 		key = ' '
 	end
 	local instance = settings.instance_key[key]
 	local increment = settings.increment[key]
     local synthesis = settings.synthesis[key]
+    local fire_neuron = settings.fire_neuron[key]
     
 	if key == 'x' and input.hover then
 		input.hover:destroy()
@@ -19,9 +21,7 @@ function love.keypressed(key) -- change name UNLESS modify exists
 	if (input.hover and input.hover.name) and not input.selected1 and not input.selected2 and (#key == 1 or key == 'backspace') then -- gross
 		local newname
 		if key == 'backspace' then
-			print(input.hover)
-			newname = input.hover.name:sub(
-				1,#input.hover.name-1)
+			newname = input.hover.name:sub(1,#input.hover.name-1)
 		elseif #key == 1 then
 			newname = input.hover.name..key
 		else
@@ -33,12 +33,16 @@ function love.keypressed(key) -- change name UNLESS modify exists
 
 			input.hover.name = newname
 		end
+	elseif (not input.hover) and not input.selected1 and not input.selected2 and key == '.' then
+    	
 	elseif input.selected1 and synthesis and not input.selected2 then
         input.selected1.synthesis = synthesis
+    elseif input.selected1 and fire_neuron and not input.selected2 then
+    	input.selected1.input = input.selected1.input or {}
+    	input.selected1.input[#input.selected1.input+1] = {amount=fire_neuron,time=gametime,transmitter='action_p'}
     elseif input.selected2 and increment then
         input.selected1.connections[input.selected2] = input.selected1.connections[input.selected2] or 0
         input.selected1.connections[input.selected2] = math.max(math.min(input.selected1.connections[input.selected2]+increment,1),-1)
-        --error('NOPE XD XD XD I HOPE U DIE')
 	elseif instance and not (input.selected1 or input.selected2) then
 		workspace:instance(tostring(love.math.random()),instance,input.mposition+vector2.new(0,0))
 	elseif key == 'return' and input.hover then

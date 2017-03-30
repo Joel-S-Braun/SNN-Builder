@@ -1,7 +1,5 @@
-local fprint = print
-
 function love.draw(d)
-	--v=binser.serialize{a='ur dadda'}
+    gametime = gametime + settings.step
     input.update()
 	render(d)
 end
@@ -16,13 +14,20 @@ function love.quit()
         end
 	end --]]
 	local file = ser(workspace)
-	love.filesystem.write('workspace_'..settings.ai_model..'.lua',file)
+	if settings.ai_model ~= 'no save' then
+		love.filesystem.write('workspace_'..settings.ai_model..'.lua',file)
+	end
     
 	--local chunk = love.filesystem.load('workspace_persistant.lua')
 end
 
 function love.load(func, chunkname)
-	fprint('consoley')
+	print('what')
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
+	font = love.graphics.setNewFont(11)
 	love.keyboard.setKeyRepeat(true)
 	
     require('ser')
