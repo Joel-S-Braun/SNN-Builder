@@ -1,5 +1,5 @@
 settings = {
-    ai_model = 'no save',
+    ai_model = 'new civilian',
     step = 1/3,--0.468126878/2
     --the reason i use step value instead of 1/fps is because while in LOVE2D, the framerate can vary from 400-100 as long as vsync is off, ROBLOX has fps limit of 60
     --this limit means thatb if the FPS drops, then it may end up offsetting the 
@@ -8,6 +8,7 @@ settings = {
     critical_activation = 0.01,
     lock_time = 300,
 
+    
     membrane_leak_multiplier=1.5,
      -- integrate this ^
     negative_drop = -2, -- the value of neuron membrane once action potential has been fired
@@ -31,7 +32,7 @@ settings = {
 
     increment = {
         ['['] = -0.1,
-        [']'] = 0.1,
+        [']'] = 0.1,--
     },
 
     fire_neuron = {
@@ -53,6 +54,8 @@ settings = {
         epinephrine_dopamine = 1,
         epinephrine_cortisol = -1,
         epinephrine_substance_p = -0.2,
+
+        action_p_substance_p=-1
     },
 
     neurotransmitter_combination = {
@@ -64,13 +67,14 @@ settings = {
         {'epinephrine','cortisol'},
         {'epinephrine','substance_p'},
         {'epinephrine','dopamine'},
+        {'action_p','substance_p'}
         
     },
 
     colours = {
-        input_neuron = {30,30,30},
+        input_neuron = {87,87,87},
         soft_mem_neuron={253,0,138},
-        hidden_neuron= {138,0,9},
+        hidden_neuron= {0,9,138},
         output_neuron= {253,138,0},
 
         dopamine= {9,0,138},

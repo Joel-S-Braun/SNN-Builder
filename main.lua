@@ -21,9 +21,8 @@ function love.quit()
 	--local chunk = love.filesystem.load('workspace_persistant.lua')
 end
 
-function love.load(func, chunkname)
-	print('what')
-
+function love.load()
+    love.graphics.setBackgroundColor(29,31,33)
 	font = love.graphics.setNewFont(11)
 	love.keyboard.setKeyRepeat(true)
 	

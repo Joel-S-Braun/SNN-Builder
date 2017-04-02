@@ -6,6 +6,10 @@ function love.keypressed(key) -- change name UNLESS modify exists
 		input.selected1 = nil
 		input.selected2 = nil
 	end
+    if key == '=' then
+        local file = ser(workspace)
+        love.filesystem.write('workspace_'..settings.ai_model..'.lua',file)
+    end
 	if key == 'space' then
 		key = ' '
 	end

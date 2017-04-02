@@ -33,7 +33,7 @@ local function render_neuron(obj)
         love.graphics.rectangle('fill',obj.position.x+15,obj.position.y+15,50-30,50-30)
         
         --name
-        love.graphics.setColor(0,253,253)
+        love.graphics.setColor(115,245,237)
         love.graphics.printf(obj.name, obj.position.x, obj.position.y, 50, 'left', r, sx, sy, ox, oy, kx, ky)
     end
 end

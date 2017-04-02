@@ -1,3 +1,4 @@
+love.filesystem.setIdentity('snn', searchorder)
 workspace = (love.filesystem.load('workspace_'..settings.ai_model..'.lua') or function() return {} end)() -- :^)
 for i,v in pairs(workspace) do -- disgostin i know
     if type(v) == 'table' then
@@ -17,7 +18,34 @@ end
 
 gametime = 0
 
-love.filesystem.load("data.lua")()
+if love.filesystem.exists("data.lua") then
+    love.filesystem.load("data.lua")()
+else
+    neuron_input = {}
+    exeption_list= {}
+    -- i know hardwiring stuff is bad but stiiiill
+    love.filesystem.write('data.lua',[[ 
+if nn_workspace then
+	-- edit this if you're currently using snn executor
+	nn_workspace.input[default_parent].bias = 6 -- you can replace default_parent with name of neurotransmitter
+
+	nn_workspace.exeptions[default_parent].bias = {
+		dopamine=2, -- dopamine is now a strong exhibitory chemical for the bias neuron
+		substance_p = -2  -- substance p is now a strong inhibitory chemical for the bias neuron
+	}
+else
+	--edit this if you're currently using snn builder
+	exeption_list=exeption_list or{}
+	neuron_input=neuron_input or{}
+	neuron_input.bias=6
+
+	exeption_list.bias = {
+	    dopamine=2, -- dopamine is now a strong exhibitory chemical for the bias neuron
+	    substance_p = -2  -- substance p is now a strong inhibitory chemical for the bias neuron
+	}
+end]])
+    
+end
 print(neuron_input,'gang gang')
 
 local function activation_f(x)
@@ -62,7 +90,9 @@ function workspace:new_connection(from,to,v)
 end
 
 function love.focus()
-    love.filesystem.load("data.lua")()
+    if love.filesystem.exists('data.lua') then
+        love.filesystem.load("data.lua")()
+    end
 end
 
 function workspace:get_activation(neuron) --
@@ -75,7 +105,7 @@ function workspace:get_activation(neuron) --
             neuron.locked = nil
             local bassline_transmitters = {}
             neuron.input = neuron.input or {}
-            for _,data in  pairs(neuron.input) do -- gets activation value for each neurotransmitter
+            for index,data in  pairs(neuron.input) do -- gets activation value for each neurotransmitter
                 local offset_time = gametime-data.time
                 if data.transmitter == 'fire' then
                     local activation = (1-activation_f((offset_time * settings.membrane_leak_multiplier)+settings.term_time)) *-settings.negative_drop
@@ -83,7 +113,7 @@ function workspace:get_activation(neuron) --
                 else
                     local activation = activation_f(offset_time) * data.amount
                     if offset_time > settings.term_time and math.abs(activation) < settings.critical_activation then
-                        neuron.input = nil 
+                        neuron.input[index] = nil 
                     else
                         bassline_transmitters[data.transmitter] = (bassline_transmitters[data.transmitter] or 0) + activation
                     end
@@ -122,7 +152,6 @@ function workspace:get_activation(neuron) --
                     end
                 end
             end
-
             for neurotransmitter,value in pairs(bassline_transmitters) do -- bassline_transmitters have been converted into genuine transmitters value
                 local exeptions = exeption_list[neuron.name]
                 local exeption_multiplier
@@ -146,14 +175,27 @@ function workspace:get_activation(neuron) --
                 end
 
                 for reference_neuron,weight in pairs(neuron.connections) do
-                    reference_neuron.input = reference_neuron.input or {} -- input seems to randomly dissapear, this is quick fix
+                    reference_neuron.input = reference_neuron.input or {}
+                    reference_neuron.input[neuron.name] = {transmitter=neuron.synthesis,amount=(weight * bassline_value),time=gametime - settings.term_time}
+                end
+            elseif neuron.type == 'output_neuron' then
+               -- fire= workspace.output[neuron.parent.name][neuron.name]
+                --if fire then
+                --    fire()
+                --end
+                for reference_neuron,weight in pairs(neuron.connections) do
+                    reference_neuron.input = reference_neuron.input or {}
                     reference_neuron.input[neuron.name] = {transmitter=neuron.synthesis,amount=(weight * bassline_value),time=gametime - settings.term_time}
                 end
             else
                 neuron.input = neuron.input or {}
                 for reference_neuron,weight in pairs(neuron.connections) do
                     reference_neuron.input = reference_neuron.input or {}
-                    reference_neuron.input[#reference_neuron.input+1] = {transmitter=neuron.synthesis,amount=(weight * bassline_value),time=gametime} -- :O
+                    if reference_neuron.type ~= 'output_neuron' then
+                        reference_neuron.input[#reference_neuron.input+1] = {transmitter=neuron.synthesis,amount=(weight * bassline_value),time=gametime} -- :O
+                    else
+                        reference_neuron.input[reference_neuron.name] = {transmitter=neuron.synthesis,amount=(weight * bassline_value),time=gametime+settings.term_time}
+                    end
                 end
                 for i,_ in pairs(neuron.input) do
                     neuron.input[i] = nil
