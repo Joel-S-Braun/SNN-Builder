@@ -1,5 +1,4 @@
-# SNN-Builder
-This is the AI builder for The Vault :: Blood Money. I created it in LOVE2D. This lets you build spiking neural networks, with neurotransmitters. You cannot simulate the neural networks here, however in my SNN terminal you can simulate them. As this does not simulate anything, there are no genetic algorithms included here.
+This is the AI builder for The Vault :: Blood Money. I created it in LOVE2D. This lets you build spiking neural networks. To use the networks you've created, you can use the SNN Terminal to integrate the AI into ROBLOX or LOVE2D games primarily, however it should be portable to most Lua based platforms with only minor changes. 
 
 You can also create/change neurotransmitters in the settings file, however they will not automatically port to your SNN terminal so you will need to copy and paste the tables you change.
 
