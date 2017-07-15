@@ -40,14 +40,11 @@ function love.keypressed(key) -- change name UNLESS modify exists
     	
 	elseif input.selected1 and synthesis and not input.selected2 then
         input.selected1.synthesis = synthesis
-    elseif input.selected1 and fire_neuron and not input.selected2 then
-    	input.selected1.input = input.selected1.input or {}
-    	input.selected1.input[#input.selected1.input+1] = {amount=fire_neuron,time=gametime,transmitter='action_p'}
     elseif input.selected2 and increment then
         input.selected1.connections[input.selected2] = input.selected1.connections[input.selected2] or 0
         input.selected1.connections[input.selected2] = math.max(math.min(input.selected1.connections[input.selected2]+increment,1),-1)
 	elseif instance and not (input.selected1 or input.selected2) then
-		workspace:instance(tostring(love.math.random()),instance,input.mposition+vector2.new(0,0))
+		workspace:instance(tostring(love.math.random(1000)),instance,input.mposition+vector2.new(0,0))
 	elseif key == 'return' and input.hover then
 		if input.selected1 == input.hover then
 			input.selected1 = nil
@@ -58,7 +55,13 @@ function love.keypressed(key) -- change name UNLESS modify exists
 		elseif not input.selected2 and input.selected1 then
 			input.selected2 = input.hover
 		end
-
+    elseif key == ' ' then
+        settings.paused=not settings.paused
+    elseif key == 'g' then
+        local grid = 50 + settings.grid
+        for i,v in pairs(workspace:getchildren()) do
+           v.position = vector2.new(math.floor(v.position.x/grid + 0.5)*grid + (grid-50),math.floor(v.position.y/grid + 0.5)*grid+(grid-50)) 
+        end
 	end
 end
 

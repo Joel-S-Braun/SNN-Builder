@@ -17,9 +17,10 @@ for i,v in pairs(workspace) do -- disgostin i know
 end
 
 gametime = 0
-
+neuron_input={}
+exeption_list={}
 if love.filesystem.exists("data.lua") then
-    love.filesystem.load("data.lua")()
+    --love.filesystem.load("data.lua")()
 else
     neuron_input = {}
     exeption_list= {}
@@ -50,7 +51,7 @@ print(neuron_input,'gang gang')
 
 local function activation_f(x)
     --local x=x*10 -- converts to ms for inpit
-	return math.sin(1/(x/36+0.31845))^4
+	return math.sin(1/(x/36+0.31845))^4 -- (sin(x) / (x+1)^1.4)*3.13
 end
 
 function approx_equal(a,b,e)
@@ -91,7 +92,7 @@ end
 
 function love.focus()
     if love.filesystem.exists('data.lua') then
-        love.filesystem.load("data.lua")()
+        --love.filesystem.load("data.lua")()
     end
 end
 

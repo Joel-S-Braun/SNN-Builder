@@ -1,12 +1,14 @@
 settings = {
-    ai_model = 'new civilian',
-    step = 1/3,--0.468126878/2
+    ai_model = 'new police',
+    paused=true,
+    step = 0.1,--1/3,--11.4540217/60
     --the reason i use step value instead of 1/fps is because while in LOVE2D, the framerate can vary from 400-100 as long as vsync is off, ROBLOX has fps limit of 60
     --this limit means thatb if the FPS drops, then it may end up offsetting the 
     
     term_time= 11.4540217, -- also peak time
     critical_activation = 0.01,
     lock_time = 300,
+    grid=5,
 
     
     membrane_leak_multiplier=1.5,
@@ -44,7 +46,7 @@ settings = {
         epinephrine= 0.5,  -- adrenaline
         cortisol= - -0.4,
         substance_p= 1.2, -- pain. yes it is the real scientific name for a neurotransmitter released when you feel pain
-        nitrous_oxide = -0.5, -- should be -2 but for demo its 0.5
+        nitrous_oxide = -2,
         action_p=1,
         fire=1,
 
@@ -55,7 +57,6 @@ settings = {
         epinephrine_cortisol = -1,
         epinephrine_substance_p = -0.2,
 
-        action_p_substance_p=-1
     },
 
     neurotransmitter_combination = {
@@ -67,7 +68,6 @@ settings = {
         {'epinephrine','cortisol'},
         {'epinephrine','substance_p'},
         {'epinephrine','dopamine'},
-        {'action_p','substance_p'}
         
     },
 
@@ -77,7 +77,7 @@ settings = {
         hidden_neuron= {0,9,138},
         output_neuron= {253,138,0},
 
-        dopamine= {9,0,138},
+        dopamine= {30,0,158},
         cortisol = {138,138,9},
         epinephrine = {238,9,138}, -- change ph to p
         substance_p = {138,0,9},

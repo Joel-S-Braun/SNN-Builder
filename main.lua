@@ -1,5 +1,4 @@
 function love.draw(d)
-    gametime = gametime + settings.step
     input.update()
 	render(d)
 end
@@ -9,6 +8,8 @@ function love.quit()
 	for i,v in pairs(workspace) do
         if type(v) == 'table' then
             v.destroy = nil
+            v.input = {}
+            v.locked = nil
         elseif type(v) == 'function' then
             workspace[i] = nil
         end
@@ -32,4 +33,4 @@ function love.load()
 	require('workspace')
 	require('input')
 	require('render')
-end
+end 

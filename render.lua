@@ -92,4 +92,7 @@ function render(delta) -- possibly need to order so that input render first?
     love.graphics.printf('total connection count: '..total_connections,0,(len+2)*16,12*50,'left')
     love.graphics.printf('gametime: '..(math.floor(gametime))..'ms',0,(len+3)*16,12*50,'left')
     love.graphics.printf('fps: '..love.timer:getFPS(),0,(len+4)*16,12*50,'left')
+	if input.selected1 and input.selected2 then
+		love.graphics.printf('weight: '..(input.selected1.connections[input.selected2] or '0 (nil)'),0,(len+5)*16,12*50,'left')
+	end
 end
